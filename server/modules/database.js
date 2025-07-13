@@ -73,8 +73,42 @@ async function listRecords(collectionName) {
     
 }
 
+
+/**
+ * Updates a single document in the specified MongoDB collection.
+ *
+ * This function connects to the database and applies an update to the first document
+ * that matches the provided filter. The update is applied using the `$set` operator.
+ *
+ * @async
+ * @function updateRecord
+ * @param {string} collectionName - The name of the collection to update.
+ * @param {Object} filter - The filter used to locate the document to update.
+ * @param {Object} update - The fields and values to update in the matched document.
+ * @returns {Promise<void>} - Resolves when the update operation completes.
+ *
+ * @example
+ * await updateRecord("items", { name: "Wireless Mouse" }, { price: "2000" });
+ */
+
+async function updateRecord(collectionName, filter, update) {
+    try{
+
+        const dataBase=await connect();
+        await dataBase.collection(collectionName).updateOne(
+            filter,
+            {$set: update}
+        )
+        console.log(`${collectionName} updated with ${update}`)
+
+    } catch(err){
+        console.log(err);
+    }
+}
+
 module.exports={
     addRecord,
     listRecords,
+    updateRecord,
 }
 
