@@ -1,11 +1,16 @@
+//this contains all the database functions and connection logic
+
+//importing modules
 const {MongoClient, ObjectId}=require('mongodb');
 
+//Environmental variables and client initialization
 const uri=process.env.DATABASE_URI;
 const dbName=process.env.DATABASE_NAME;
 const client=new MongoClient(uri);
 
 let db;
 
+//connects to the database
 async function connect(){
     if(!db){
 
@@ -75,6 +80,27 @@ async function listRecords(collectionName) {
 
 
 /**
+ * Finds a single document in the specified collection based on a filter.
+ *
+ * @param {string} collectionName - The name of the MongoDB collection.
+ * @param {Object} filter - The filter used to find the document.
+ * @returns {Promise<Object|null>} - The matching document, or null if not found.
+ */
+async function findRecord(collectionName, filter) {
+    
+    try{
+
+        const dataBase=await connect();
+        return await db.collection(collectionName).findOne(filter);
+
+    } catch(err){
+        console.log(err);
+    }
+
+}
+
+
+/**
  * Updates a single document in the specified MongoDB collection.
  *
  * This function connects to the database and applies an update to the first document
@@ -106,9 +132,32 @@ async function updateRecord(collectionName, filter, update) {
     }
 }
 
+/**
+ * Deletes a single document from the specified collection based on a filter.
+ *
+ * @param {string} collectionName - The name of the MongoDB collection.
+ * @param {Object} filter - The filter used to find the document to delete.
+ * @returns {Promise<void>}
+ */
+
+async function deleteRecord(collectionName, filter) {
+    
+    try{
+
+        const dataBase=await connect();
+        await dataBase.collection(collectionName).deleteOne(filter);
+        console.log(`record with field ${field} removed from ${collectionName}`);
+
+    } catch(err){
+        console.log(err);
+    }
+
+}
+
 module.exports={
     addRecord,
     listRecords,
     updateRecord,
+    deleteRecord,
 }
 
