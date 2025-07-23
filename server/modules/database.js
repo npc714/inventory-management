@@ -47,8 +47,6 @@ async function addRecord(collectionName, record){
             await dataBase.collection(collectionName).insertOne(record);
         }
 
-        console.log(`${record} added to ${collectionName}`);
-
     } catch(err) {
 
         console.log(err);
@@ -157,6 +155,7 @@ async function deleteRecord(collectionName, filter) {
 module.exports={
     addRecord,
     listRecords,
+    findRecord,
     updateRecord,
     deleteRecord,
 }

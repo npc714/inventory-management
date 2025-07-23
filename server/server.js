@@ -1,11 +1,12 @@
 //modules
-require("dotenv").config({ path: "./.env"});
+require("dotenv").config({ path: "server/.env"});
 const express=require ("express");
 const cookieparser=require("cookie-parser");
 const cors=require("cors");
 
 //routes
 const inventory=require("./routes/inventory");
+const user=require("./routes/auth/user");
 
 const port=process.env.PORT;
 const app=express();
@@ -22,6 +23,7 @@ app.use(cors({
 
 //mounting the routes
 app.use('/inventory', inventory);
+app.use('/auth/admin', user);
 
 app.listen(port, ()=>{
     console.log(`Server running on port: ${port}`);
