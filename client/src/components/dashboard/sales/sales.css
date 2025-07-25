@@ -1,0 +1,649 @@
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 80px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    z-index: 10;
+}
+
+.right, .left{
+    align-items: center;
+    display: flex;
+    flex: 50%;
+    height: 100%;
+}
+
+.left{
+    justify-content: flex-start;
+}
+
+.left .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom left, rgb(0, 230, 92), rgb(0, 179, 179));
+    height: 45px;
+    width: 45px;
+    border-radius: 12px;
+    margin-right: 15px;
+}
+
+.left .icon svg{
+    color: white;
+    width: 25px;
+    height: 25px;
+    
+}
+
+.title{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(67, 67, 67);
+}
+
+.right{
+    justify-content: flex-end;
+}
+
+.current-sale-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 40px;
+    margin: 20px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    font-family: Inter;
+    font-size: 0.8rem;
+    background-color: rgba(0, 230, 92, 0.3);
+    color: rgb(0, 128, 0);
+}
+
+.current-sale-button svg{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    color: rgb(0, 128, 0);
+}
+
+.current-sale-button span{
+    font-family: Sansation;
+    font-size: 0.8rem;
+    font-weight: 900;
+    margin-left: 5px;
+    color: rgb(0, 60, 0);
+}
+
+.logout-button svg{
+    color: rgb(128, 128, 128);
+}
+
+.role-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    height: 50px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgb(57, 57, 57);
+    margin-right: 20px;
+}
+
+.account-initial{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: linear-gradient(to left, rgb(0, 230, 92), rgb(0, 179, 179));
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 600;
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.logout-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+}
+
+.main{
+    display: grid;
+    grid-template-rows: 1fr 1000px;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 20px;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    width: 100vw;
+    min-height: 100vh;
+    gap: 20px;
+}
+
+.category{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.key-metrics{
+    grid-column: 1/3;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 15px;
+}
+
+.heading{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    border-bottom: 0.5px solid rgb(200, 200, 200);
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(67, 67, 67);
+    white-space: nowrap;
+}
+
+.key-metrics .heading{
+    grid-column: 1/3;
+}
+
+.metric{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    background-color:  hsl(144, 100%, 90%);
+    padding: 10px 25px;
+    border-radius: 15px;
+}
+
+.total-sales{
+    margin-left: 15px;
+    background: linear-gradient(to right, hsl(144, 100%, 40%),hsl(144, 100%, 30%));
+    padding: 10px 25px;
+}
+
+.stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+}
+
+.stat-title{
+    font-size: 1.1rem;
+    opacity: 0.6;
+}
+
+.total-sales-stats .stat-title{
+    opacity: 0.8;
+}
+
+.stat-data{
+    font-family: Sansation;
+    font-size: 1.7rem;
+    font-weight: 900;
+    margin: 7px 0;
+    color: rgb(67, 67, 67);
+}
+
+.stat-data span{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin-right: 5px;
+}
+
+.stat-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    height: 40px;
+    width: 40px;
+}
+
+.lucide-award{
+    color: white;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.total-sales-stats p{
+    color: white;
+}
+
+.total-revenue{
+    margin-right: 15px;
+}
+
+.lucide-dollar-sign{
+    color: hsl(144, 100%, 40%);
+    width: 100%;
+    height: 100%;
+}
+
+.items-sold{
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.items-sold .stat-icon, .average-sale .stat-icon{
+    width: 30px;
+}
+
+.items-sold .stat-icon svg{
+    color: blue;
+    width: 100%;
+    height: 100%;
+}
+
+.average-sale{
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.average-sale .stat-icon svg{
+    color: purple;
+    width: 100%;
+    height: 100%;
+}
+
+.product-catalog{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.search-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.search-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    height: 100%;
+    border: none;
+    background: none;
+}
+
+.search-button svg{
+    color: rgb(128, 128, 128);
+}
+
+.search{
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: rgb(67, 67, 67);
+    padding-top: 5px;
+}
+
+.filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    height: 35px;
+    background: none;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 8px;
+}
+
+.filter svg{
+    color: rgb(120, 120, 120);
+}
+
+.product-list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.product-catalog-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px 10px;
+    border: 1px solid rgb(200, 200, 200);
+    min-height: 120px;
+}
+
+.product-avatar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Inter;
+    aspect-ratio: 1/1;
+    height: 85%;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: linear-gradient(to left, hsl(144, 100%, 40%), hsl(180, 100%, 40%));
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.product-name{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(67, 67, 67);
+    margin-bottom: 2px;
+}
+
+.product-id{
+    margin: 2px 0;
+    font-weight: 700;
+    color: rgb(75, 75, 75);
+}
+
+.product-quantity{
+    font-size: 1rem;
+    font-weight: 700;
+    color: green;
+}
+
+.button-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+}
+
+.product-price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(72, 72, 255, 0.5);
+    font-family: Sansation;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: blue;
+    min-width: 80px;
+    height: 35px;
+    border-radius: 15px;
+    padding: 8px;
+}
+
+.add-product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(to right, hsl(144, 100%, 40%),hsl(144, 100%, 30%));
+    border: none;
+    color: white;
+    margin-top: auto;
+    font-size: 1.1rem;
+}
+
+.add-product svg{
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+    color: white;
+}
+
+.third-grid-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.current-sale{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.sale-list{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sale-list-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+}
+
+.sale-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.sale-description{
+    font-size: 1.1rem;
+    color: rgb(67, 67, 67);
+    white-space: nowrap;
+}
+
+.sale-description span{
+    font-family: Sansation;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.sale-quantity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(128, 128, 128);
+}
+
+.item-total-price{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: Sansation;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgb(67, 67, 67);
+}
+
+.current-sale-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    padding-top: 0px;
+}
+
+.current-sale-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-top: 1px solid rgb(200, 200, 200);
+    color: rgb(67, 67, 67);
+}
+
+.sale-total{
+    font-family: Sansation;
+    font-weight: 900;
+    font-size: 0.9;
+    margin-left: auto;
+    color: rgb(0, 128, 0)
+}
+
+.process-payment{
+    width: 100%;
+    height: 90px;
+    border-radius: 8px;
+    background: linear-gradient(to right, hsl(144, 100%, 40%),hsl(144, 100%, 30%));
+    border: none;
+    color: white;
+    margin-top: auto;
+    font-size: 1.1rem;
+}
+
+.recent-sales{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.recent-sale-list{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+.recent-sale-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.recent-sale-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.recent-sale-description{
+    font-size: 1.1rem;
+    color: rgb(67, 67, 67);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(128, 128, 128);
+}
+
+.recent-sale-price{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: Sansation;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgb(0, 128, 0);
+}
+
