@@ -1,4 +1,4 @@
-.login-container{
+.add-staff-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +6,7 @@
     height: fit-content;
     border-radius: 20px;
     padding: 40px 30px;
+    padding-bottom: 20px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.18);
     background-color: white;
     color: rgb(66, 66, 66);
@@ -42,14 +43,22 @@ form{
     width: 100%;
     height: 100%;
     color: white;
+    margin-left: 3px;
 }
 
 .form-header-text{
     font-size: 1.7rem;
-    margin: 15px;
+    margin: 10px;
 }
 
-.staff-id-label, .password-label, .role-label{
+.name-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.staff-id-label, .password-label, .role-label, .first-name-label, .last-name-label{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -102,10 +111,10 @@ input:focus{
     color: white;
 }
 
-.staff-id-input, .password-container{
+.first-name-input, .last-name-input, .staff-id-input, .password-container{
     width: 100%;
     height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     margin-top: 5px;
     border-radius: 10px;
     border: 1px solid  rgba(0, 0, 0, 0.3);
@@ -126,7 +135,7 @@ input:focus{
     font-size: 1.2rem;
 }
 
-.log-in{
+.add-staff{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,4 +147,19 @@ input:focus{
     font-size: 1.2rem;
     color: white;
     background: linear-gradient(to bottom right, hsl(180, 100%, 35%), rgb(0, 128, 128));
+}
+
+a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: rgb(0, 128, 128);
+}
+
+a svg{
+    width: 12px;
+    height: 12px;
+    margin-bottom: 1px;
+    margin-right: 5px;
 }

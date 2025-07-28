@@ -319,6 +319,35 @@
     color: rgb(220, 20, 20);
 }
 
+.low-stock .add-icon{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.3);
+    white-space: nowrap;
+    color: green;
+    font-weight: 900;
+    border: none;
+}
+
+.low-stock .add-icon svg{
+    color: green;
+    fill: green;
+    margin-right: 5px;
+}
+
+.low-stock:hover .add-icon{
+    display: flex;
+}
+
+.low-stock:hover .stat-icon{
+    display: none;
+}
+
 .sales-team{
     display: flex;
     flex-direction: column;

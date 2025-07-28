@@ -1,6 +1,6 @@
 <template>
 
-    <component :is="Sales"/>
+    <component :is="Admin"/>
 
 </template>
 
