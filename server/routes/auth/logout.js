@@ -11,6 +11,7 @@ module.exports= function(io){
                 httpOnly: true,
                 secure: false,
                 sameSite: 'lax',
+                path: "/",
             });
             await updateRecord("users", {staffId: req.params.staffId}, {online: false});
             await updateRecord("users", {staffId: req.params.staffId}, {lastSeen: Date.now()});

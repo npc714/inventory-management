@@ -47,7 +47,7 @@ router.beforeEach(async (to, from, next) => {
     const auth = useAuthStore();
 
     try {
-        const response = await api.get('auth/logged-in');
+        const response = await api.get(`auth/logged-in`);
 
         auth.isAuthenticated = response.data.authenticated;
         auth.user = response.data.result;

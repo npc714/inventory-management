@@ -18,7 +18,7 @@
             
             </div>
 
-            <form submit.prevent="">
+            <form @submit.prevent="addStock">
 
                 <div class="form-container">
 
@@ -26,12 +26,12 @@
 
                         <label class="name-label input-label">
                             Product Name
-                            <input type="text" class="name-input" placeholder="Enter A Descriptive Name">
+                            <input type="text" class="name-input" placeholder="Enter A Descriptive Name" v-model="name">
                         </label>
 
                         <label class="category-label input-label">
                             Category
-                            <select name="category" class="category-input" required>
+                            <select name="category" class="category-input" required v-model="category">
                                 <option value="" disabled selected hidden>Select a category</option>
                                 <option value="laptops">Laptops</option>
                                 <option value="tablets">Tablets</option>
@@ -48,32 +48,35 @@
 
                         <label class="brand-label input-label">
                             Brand
-                            <input type="text" class="brand-input" placeholder="Enter Brand">
+                            <input type="text" class="brand-input" placeholder="Enter Brand" v-model="brand">
                         </label>
 
                         <label class="variant-label input-label">
                             <div class="text">Variant / Attributes<span>(No spaces, comma separated)</span></div>
-                            <input type="text" class="variant-input" placeholder="E.g 256GB,Black,4GBRAM">
+                            <input type="text" class="variant-input" placeholder="E.g 256GB,Black,4GBRAM" v-model="attributes">
                         </label>
 
                         <label class="sku-label input-label">
                             <div class="text">SKU<span>(Auto Generated)</span></div>
-                            <input type="text" class="sku-input" value="SKU-ELE-WM-SMA-BLU" readonly>
+                            <input type="text" class="sku-input" value="SKU-ELE-WM-SMA-BLU" readonly v-model="sku">
                         </label>
 
                         <label class="quantity-label input-label">
                             Quantity
-                            <input type="number" class="quantity-input" placeholder="Enter Quantity">
+                            <input type="number" class="quantity-input" placeholder="Enter Quantity" v-model="quantity">
                         </label>
 
                         <label class="cost-price-label input-label">
                             Cost Price
-                            <input type="number" class="cost-price-input" placeholder="Enter Cost Price">
+                            <input type="number" class="cost-price-input" placeholder="Enter Cost Price" v-model="costPrice">
                         </label>
 
                         <label class="selling-price-label input-label">
                             Selling Price
-                            <input type="number" class="selling-price-input" placeholder="Enter Selling Price">
+                            <div class="selling-price-container">
+                                <input type="number" class="selling-price-input" placeholder="Enter Selling Price" v-model="sellingPrice">
+                                <input type="text" class="selling-price-input" id="percent" placeholder="%" v-model="sellingPricePercent">
+                            </div>
                         </label>
 
                     </div>
@@ -103,3 +106,22 @@
 </template>
 
 <style scoped src="./addStock.css"></style>
+
+<script setup>
+
+    import { useAddStock } from './addStock';
+
+    const {
+        name,
+        category,
+        brand,
+        attributes,
+        sku,
+        quantity,
+        costPrice,
+        sellingPrice,
+        sellingPricePercent,
+        addStock,
+    }=useAddStock();
+
+</script>

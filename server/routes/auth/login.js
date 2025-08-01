@@ -34,6 +34,8 @@ module.exports=function (io){
                 httpOnly: true,
                 secure: false,
                 sameSite: 'lax',
+                path: '/',
+                maxAge: 60 * 60 * 24 * 365 * 10
             });
 
             await updateRecord("users", {staffId: user.staffId}, {online: true});
