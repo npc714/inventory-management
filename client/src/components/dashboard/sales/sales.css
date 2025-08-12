@@ -404,6 +404,7 @@
     font-weight: 700;
     color: rgb(67, 67, 67);
     margin-bottom: 2px;
+    text-transform: capitalize;
 }
 
 .product-id{
@@ -442,24 +443,42 @@
     padding: 8px;
 }
 
+.button-wrapper form{
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.button-wrapper form input{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100px;
+    padding-left: 10px;
+    border-radius: 8px;
+    border: 1px solid rgb(200, 200, 200);
+    -moz-appearance: textfield;
+}
+
 .add-product{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 40px;
-    border-radius: 8px;
+    aspect-ratio: 1/1;
+    width: 30px;
+    border-radius: 50%;
     background: linear-gradient(to right, hsl(144, 100%, 40%),hsl(144, 100%, 30%));
     border: none;
     color: white;
-    margin-top: auto;
     font-size: 1.1rem;
 }
 
 .add-product svg{
     width: 12px;
     height: 12px;
-    margin-right: 6px;
     color: white;
 }
 
@@ -506,6 +525,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    gap: 5px;
     width: 100%;
     height: 100%;
 }
@@ -514,6 +534,7 @@
     font-size: 1.1rem;
     color: rgb(67, 67, 67);
     white-space: nowrap;
+    text-transform: capitalize;
 }
 
 .sale-description span{
@@ -531,14 +552,34 @@
 
 .item-total-price{
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
     width: 100%;
     height: 100%;
     font-family: Sansation;
     font-size: 0.9rem;
     font-weight: 700;
     color: rgb(67, 67, 67);
+}
+
+.remove-product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(to right, rgb(204, 0, 82) ,rgb(153, 0, 61));
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.remove-product svg{
+    aspect-ratio: 1/1;
+    width: 15px;
 }
 
 .current-sale-bottom{

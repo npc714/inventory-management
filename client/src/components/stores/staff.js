@@ -28,7 +28,6 @@ export const useStaffStore = defineStore("staff", {
                         .replace(/\b\w/g, (char) => char.toUpperCase());
                 });
 
-                console.log(this.salesStaff);
                 return;
             } catch (err) {
                 console.log(err);

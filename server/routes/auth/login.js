@@ -38,7 +38,10 @@ module.exports=function (io){
                 maxAge: 60 * 60 * 24 * 365 * 10
             });
 
-            await updateRecord("users", {staffId: user.staffId}, {online: true});
+            await updateRecord("users", {staffId: user.staffId}, {
+                online: true,
+                lastSeen: Date.now(),
+            });
             io.emit("activeStateChange");
 
             return res.status(200).json({

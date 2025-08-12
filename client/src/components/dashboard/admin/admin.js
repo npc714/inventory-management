@@ -1,4 +1,4 @@
-import {ref, onMounted, onBeforeMount} from "vue";
+import {onMounted, onBeforeMount} from "vue";
 import { useStaffStore } from "../../stores/staff";
 import socket from '../../../socket';
 

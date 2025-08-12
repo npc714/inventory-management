@@ -30,8 +30,8 @@
                         <path
                             d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" />
                     </svg>
-                    3 items
-                    <span>₦8,000,000</span>
+                    {{totalSaleItems}} {{ totalSaleItems==1?'item':'items' }}
+                    <span>₦{{saleTotal.toLocaleString()}}</span>
                 </button>
 
                 <button class="role-button">
@@ -150,8 +150,8 @@
 
                         <div class="input-container">
                             <button class="search-button">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round"
-                                    viewBox="0 0 16 16" width="16">
+                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
+                                    width="16">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M1.5 6.5C1.5 3.73858 3.73858 1.5 6.5 1.5C9.26142 1.5 11.5 3.73858 11.5 6.5C11.5 9.26142 9.26142 11.5 6.5 11.5C3.73858 11.5 1.5 9.26142 1.5 6.5ZM6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C8.02469 13 9.42677 12.475 10.5353 11.596L13.9697 15.0303L14.5 15.5607L15.5607 14.5L15.0303 13.9697L11.596 10.5353C12.475 9.42677 13 8.02469 13 6.5C13 2.91015 10.0899 0 6.5 0Z"
                                         fill="currentColor"></path>
@@ -162,8 +162,8 @@
                         </div>
 
                         <button class="filter">
-                            <svg data-testid="geist-icon" height="16" stroke-linejoin="round"
-                                viewBox="0 0 16 16" width="16">
+                            <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
+                                width="16">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M1 0H1.75H14.25H15V0.75V3V3.31066L14.7803 3.53033L10.5 7.81066V15.25V16H9.75H9H8.7816L8.59734 15.8827L5.84734 14.1327L5.5 13.9117V13.5V7.81066L1.21967 3.53033L1 3.31066V3V0.75V0ZM2.5 1.5V2.68934L6.78033 6.96967L7 7.18934V7.5V13.0883L9 14.361V7.5V7.18934L9.21967 6.96967L13.5 2.68934V1.5H2.5Z"
                                     fill="currentColor"></path>
@@ -175,251 +175,38 @@
 
                 <div class="product-list">
 
-                    <div class="product-catalog-item">
+                    <div class="product-catalog-item" v-for="x in stock.stocks" :key="x.sku">
 
                         <div class="product-avatar">
-                            M
+                            {{ x.name[0].toUpperCase() }}
                         </div>
 
                         <div class="product-info">
 
                             <p class="product-name">
-                                MacBook Pro 16"
+                                {{ x.name }}
                             </p>
 
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
+                            <p class="product-id">SKU: {{ x.sku.toLowerCase() }}</p>
+                            <p class="product-quantity">{{ x.totalQuantity }} left</p>
                         </div>
 
                         <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
+                            <p class="product-price">₦{{ x.sellingPrice.toLocaleString() }}</p>
 
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
+                            <form @submit.prevent="addSaleItem(x, itemQuantity)">
 
-                    </div>
-                    <div class="product-catalog-item">
+                                <input type="number" class="sale-quantity" placeholder="Qty" v-model="itemQuantity">
 
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="product-catalog-item">
-
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="product-catalog-item">
-
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="product-catalog-item">
-
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="product-catalog-item">
-
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="product-catalog-item">
-
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="product-catalog-item">
-
-                        <div class="product-avatar">
-                            M
-                        </div>
-
-                        <div class="product-info">
-
-                            <p class="product-name">
-                                MacBook Pro 16"
-                            </p>
-
-                            <p class="product-id">SKU: MBP001</p>
-                            <p class="product-quantity">22 left</p>
-                        </div>
-
-                        <div class="button-wrapper">
-                            <p class="product-price">₦ 4,000,000</p>
-
-                            <button class="add-product">
-                                <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
-                                    width="16">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
-                                        fill="currentColor"></path>
-                                </svg>
-                                Add
-                            </button>
+                                <button class="add-product" type="submit">
+                                    <svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16"
+                                        width="16">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M 8.75,1 H7.25 V7.25 H1.5 V8.75 H7.25 V15 H8.75 V8.75 H14.5 V7.25 H8.75 V1.75 Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
 
                     </div>
@@ -438,107 +225,29 @@
 
                     <div class="sale-list">
 
-                        <div class="sale-list-item">
+                        <div class="sale-list-item" v-for="x in saleItems">
                             <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
+                                <p class="sale-description">{{ x.name }}</p>
                                 <p class="sale-quantity">
-                                    Qty: 2
+                                    Qty: {{x.quantity}}
                                 </p>
                             </div>
 
                             <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
+                                ₦ {{(x.sellingPrice*x.quantity).toLocaleString()}}
 
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
+                                <button class="remove-product" @click="removeSaleItem(x)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
+                                        <path d="M10 11v6" />
+                                        <path d="M14 11v6" />
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                        <path d="M3 6h18" />
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                    </svg>
+                                </button>
 
-                            <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
-
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
-
-                            <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
-
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
-
-                            <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
-
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
-
-                            <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
-
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
-
-                            <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
-
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
-
-                            <div class="item-total-price">
-                                ₦ 8,000,000
-                            </div>
-
-                        </div>
-                        <div class="sale-list-item">
-                            <div class="sale-info">
-                                <p class="sale-description">MacBook Pro 16"</p>
-                                <p class="sale-quantity">
-                                    Qty: 2
-                                </p>
-                            </div>
-
-                            <div class="item-total-price">
-                                ₦ 8,000,000
                             </div>
 
                         </div>
@@ -550,11 +259,11 @@
                         <div class="current-sale-total">
                             Total:
                             <p class="sale-total">
-                                ₦ 8,000,000
+                                ₦ {{saleTotal.toLocaleString()}}
                             </p>
                         </div>
 
-                        <button class="process-payment">
+                        <button class="process-payment" @click="processPayment()">
                             Process Payment
                         </button>
 
@@ -569,7 +278,7 @@
                     </div>
 
                     <div class="recent-sale-list">
-                        
+
                         <div class="recent-sale-item">
                             <div class="recent-sale-info">
                                 <p class="recent-sale-description">MacBook Pro + AirPods</p>
@@ -753,7 +462,20 @@
 
 <script setup>
 
-    import { useAuthStore } from "../../stores/auth";
-    const auth=useAuthStore();
+import { useSales } from "./sales";
+import { useAuthStore } from "../../stores/auth";
+import { useStockStore } from "../../stores/stock";
+const auth = useAuthStore();
+const stock = useStockStore();
+
+const {
+    saleItems,
+    itemQuantity,
+    saleTotal,
+    totalSaleItems,
+    addSaleItem,
+    removeSaleItem,
+    processPayment,
+} = useSales();
 
 </script>

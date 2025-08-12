@@ -23,11 +23,13 @@ export const useStockStore = defineStore("stock", {
 
         },
 
-        async getInventory() {
+        async getStocks() {
 
             try {
 
                 const response = await api.get("/inventory/list-items");
+                console.log(response);
+                this.stocks=response.data.result;
 
             } catch (err) {
                 console.log(err);

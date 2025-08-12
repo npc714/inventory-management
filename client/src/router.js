@@ -48,9 +48,13 @@ router.beforeEach(async (to, from, next) => {
 
     try {
         const response = await api.get(`auth/logged-in`);
-
+        const wasAuthenticated = auth.isAuthenticated;
         auth.isAuthenticated = response.data.authenticated;
         auth.user = response.data.result;
+
+        if (auth.isAuthenticated && !wasAuthenticated) {
+            auth.startHeartbeat();
+        }
 
         if (to.path === '/login' && auth.isAuthenticated) {
             return next('/dashboard');
