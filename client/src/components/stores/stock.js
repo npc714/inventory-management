@@ -7,7 +7,10 @@ export const useStockStore = defineStore("stock", {
     }),
 
     getters: {
-
+        getLowStock: (state)=>{
+            console.log("stock", state.stocks);
+            return state.stocks.filter((x)=>x.totalQuantity<31).length;
+        }
     },
 
     actions: {

@@ -9,12 +9,34 @@ export const useStaffStore = defineStore("staff", {
     getters: {},
 
     actions: {
+
+        async getStaffMetric(id, range) {
+           try{
+                 const response =await api.get(`/key-metrics/metric/${id}/${range}`);
+                console.log(response.data);
+                const staff=this.salesStaff.find((x)=>x.staffId===id);
+                if(staff){
+                    staff.totalOrders = response.data.result?.totalOrders ?? 0;
+                    staff.totalRevenue = response.data.result?.totalRevenue ?? 0;
+                }
+           } catch(err){
+            console.log(err);
+           }
+        },
+
         async getStaffList() {
             try {
                 const response = await api.get("auth/admin/list-users");
-                this.salesStaff = response.data.result.filter((item) => {
-                    return item.role === "sales";
-                });
+                this.salesStaff = response.data.result
+                    .filter((item) => {
+                        return item.role === "sales";
+                    })
+                    .sort((a, b) => {
+                        if (a.online !== b.online) {
+                            return b.online - a.online;
+                        }
+                        return new Date(b.lastSeen) - new Date(a.lastSeen);
+                    });
 
                 this.salesStaff.forEach((item) => {
                     item.firstName = item.firstName
@@ -26,8 +48,11 @@ export const useStaffStore = defineStore("staff", {
                     item.role = item.role
                         .toLowerCase()
                         .replace(/\b\w/g, (char) => char.toUpperCase());
-                });
 
+                    this.getStaffMetric(item.staffId, "day");
+                    
+                });
+                console.log(this.salesStaff);
                 return;
             } catch (err) {
                 console.log(err);

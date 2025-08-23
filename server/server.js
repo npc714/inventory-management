@@ -6,11 +6,12 @@ const cookieparser = require("cookie-parser");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const { listRecords, updateRecord } = require("./modules/database");
+const {logActivity}=require("./modules/fileStorage");
 
 //routes
 const user = require("./routes/auth/user");
-const loggedIn = require("./routes/auth/loggedIn");
 const activePing=require("./routes/auth/activePing");
+const logFetch=require("./routes/logFetch");
 
 const port = process.env.PORT;
 const app = express();
@@ -45,8 +46,10 @@ io.on("connection", (socket) => {
 });
 
 const login = require("./routes/auth/login")(io);
+const loggedIn = require("./routes/auth/loggedIn")(io);
 const logout = require("./routes/auth/logout")(io);
 const inventory = require("./routes/inventory")(io);
+const keyMetrics=require("./routes/keyMetrics")(io);
 
 //mounting the routes
 app.use("/inventory", inventory);
@@ -55,6 +58,8 @@ app.use("/auth", login);
 app.use("/auth", loggedIn);
 app.use("/auth", logout);
 app.use("/auth", activePing);
+app.use("/log-fetch", logFetch);
+app.use("/key-metrics", keyMetrics);
 
 //heartbeat ping to logout users
 async function ping() {
@@ -70,12 +75,18 @@ async function ping() {
                 await updateRecord("users", {staffId: x.staffId}, {
                     online: false,
                 });
+                await logActivity({
+                    action: "logout",
+                    name: `${x.firstName} ${x.lastName}`,
+                    staffId: x.staffId,
+                    role: x.role,
+                });
+                io.emit("activeStateChange");
+
 
             }
 
         }
-
-        io.emit("activeStateChange");
 
     } catch (err) {
         console.log(err);

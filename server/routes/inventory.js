@@ -12,31 +12,35 @@ module.exports=function(io){
         findRecord,
     }=require("../modules/database");
 
+    const {
+        logSale, 
+        logActivity
+    }=require("../modules/fileStorage");
+
     const router=express.Router();
 
-    const {logSale}=require("../modules/fileStorage");
 
     //to add inventory items
     router.post('/add-item', async(req, res)=>{
 
         try{
 
-            const existingItem=await findRecord("items", {sku: req.body.sku});
+            const existingItem=await findRecord("items", {sku: req.body.item.sku});
 
             let item={
-                name: req.body.name,
-                category: req.body.category,
-                brand: req.body.brand,
-                attributes: req.body.attributes,
-                sku: req.body.sku,
-                totalQuantity: req.body.quantity,
-                averageCostPrice: req.body.costPrice,
-                sellingPrice: req.body.sellingPrice,
+                name: req.body.item.name,
+                category: req.body.item.category,
+                brand: req.body.item.brand,
+                attributes: req.body.item.attributes,
+                sku: req.body.item.sku,
+                totalQuantity: req.body.item.quantity,
+                averageCostPrice: req.body.item.costPrice,
+                sellingPrice: req.body.item.sellingPrice,
                 batch: [
                     {
                         batchId: "0",
-                        quantity: req.body.quantity,
-                        costPrice: req.body.costPrice,
+                        quantity: req.body.item.quantity,
+                        costPrice: req.body.item.costPrice,
                         addedAt: new Date().toISOString()
                     }
                 ],
@@ -59,21 +63,24 @@ module.exports=function(io){
                     totalItems+=x.quantity;
                 });
 
-                await updateRecord("items", {sku: req.body.sku}, {
+                await updateRecord("items", {sku: req.body.item.sku}, {
                     totalQuantity: totalItems,
                     batch,
-                    sellingPrice: req.body.sellingPrice,
+                    sellingPrice: req.body.item.sellingPrice,
                     averageCostPrice: parseFloat((totalCost / totalItems).toFixed(2)),
                     lastUpdated: new Date().toISOString(),
                 });
-                return res.status(200).json({message: `successfully updated ${req.body.name} in items`});
+                return res.status(200).json({message: `successfully updated ${req.body.item.name} in items`});
             }
 
             await addRecord("items", item);
+            await logActivity(req.body.log);//continue here
             io.emit("itemAdded");
-            return res.status(200).json({message: `successfully added ${req.body.name} to items`});
+            io.emit("logUpdate");
+            return res.status(200).json({message: `successfully added ${req.body.item.name} to items`});
         }catch(err){
             console.log(err);
+            return res.status(500).json({message: `server error`});
         }
 
     });
@@ -88,6 +95,7 @@ module.exports=function(io){
 
         } catch(err){
             console.log(err);
+            return res.status(500).json({message: `server error`});
         }
 
     });
@@ -102,6 +110,7 @@ module.exports=function(io){
 
         } catch(err){
             console.log(err);
+            return res.status(500).json({message: `server error`});
         }
 
     });
@@ -144,10 +153,15 @@ module.exports=function(io){
                 });
 
                 io.emit("itemAdded");
+                io.emit("logUpdate");
+                io.emit("updateStaffMetric", {
+                    staffId: req.body.saleLog.staffId
+                });
 
             }
             
             await logSale(req.body.saleLog);
+            await logActivity(req.body.activityLog)
             res.status(200).json({message: `success`});
 
         } catch (err) {

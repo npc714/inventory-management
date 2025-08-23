@@ -1,7 +1,7 @@
 //this contains all the database functions and connection logic
 
 //importing modules
-const {MongoClient, ObjectId}=require('mongodb');
+const {MongoClient}=require('mongodb');
 
 //Environmental variables and client initialization
 const uri=process.env.DATABASE_URI;
@@ -115,13 +115,13 @@ async function findRecord(collectionName, filter) {
  * await updateRecord("items", { name: "Wireless Mouse" }, { price: "2000" });
  */
 
-async function updateRecord(collectionName, filter, update) {
+async function updateRecord(collectionName, filter, update, operator = "$set") {
     try{
 
         const dataBase=await connect();
         await dataBase.collection(collectionName).updateOne(
             filter,
-            {$set: update}
+            {[operator]: update}
         )
         console.log(`${collectionName} updated with ${update}`)
 
@@ -153,6 +153,7 @@ async function deleteRecord(collectionName, filter) {
 }
 
 module.exports={
+    connect,
     addRecord,
     listRecords,
     findRecord,

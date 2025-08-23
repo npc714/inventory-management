@@ -2,7 +2,8 @@ module.exports= function(io){
 
     const express=require("express");
     const router=express.Router();
-    const {updateRecord}= require("../../modules/database");
+    const {updateRecord, findRecord}= require("../../modules/database");
+    const {logActivity}=require("../../modules/fileStorage");
 
     router.get("/logout/:staffId", async (req, res)=>{
 
@@ -13,13 +14,23 @@ module.exports= function(io){
                 sameSite: 'lax',
                 path: "/",
             });
-            await updateRecord("users", {staffId: req.params.staffId}, {online: false});
-            await updateRecord("users", {staffId: req.params.staffId}, {lastSeen: Date.now()});
+            const user=await findRecord("users", {staffId: req.params.staffId});
+            await updateRecord("users", {staffId: req.params.staffId}, {
+                online: false,
+                lastSeen: Date.now(),
+            });
+            await logActivity({
+                name: `${user.firstName} ${user.lastName}`,
+                action: "logout",
+                staffId: user.staffId,
+                role: user.role,
+            });
             io.emit("activeStateChange");
-            return res.status(200).json({message: `logout successful`})
+            io.emit("logUpdate");
+            return res.status(200).json({message: `logout successful`});
         }catch(err){
             console.log(err);
-            return res.status(500).json({message: `logout failed`})
+            return res.status(500).json({message: `logout failed`});
         }
 
     });

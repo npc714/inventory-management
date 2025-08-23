@@ -1,5 +1,5 @@
 const express = require("express");
-const { updateRecord, findRecord } = require("../../modules/database");
+const { updateRecord} = require("../../modules/database");
 const router = express.Router();
 
 router.get("/ping/:id", async (req, res) => {

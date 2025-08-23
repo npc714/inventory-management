@@ -190,6 +190,7 @@
     border-radius: 5px;
     font-weight: 700;
     background: linear-gradient(to right, hsl(216, 100%, 50%),hsl(216, 100%, 40%));
+    cursor: pointer;
 }
 
 .key-metrics .button-section .time-range{
@@ -379,6 +380,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    padding-bottom: 20px;
 }
 
 .sales-team-member{
@@ -518,6 +520,7 @@
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: 10px;
 }
 
 .activity-list-item{
@@ -525,9 +528,9 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 80px;
-    padding: 15px 10px;
-    margin: 10px;
+    height: 40px;
+    padding: 5px 5px;
+    margin: 5px;
 }
 
 .activity-icon{

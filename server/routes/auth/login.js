@@ -6,6 +6,7 @@ module.exports=function (io){
     const jwt=require("jsonwebtoken");
     const bcrypt=require("bcrypt");
     const {findRecord, updateRecord}=require("../../modules/database");
+    const {logActivity}=require("../../modules/fileStorage");
 
     const router=express.Router();
 
@@ -35,15 +36,21 @@ module.exports=function (io){
                 secure: false,
                 sameSite: 'lax',
                 path: '/',
-                maxAge: 60 * 60 * 24 * 365 * 10
             });
 
             await updateRecord("users", {staffId: user.staffId}, {
                 online: true,
                 lastSeen: Date.now(),
             });
-            io.emit("activeStateChange");
 
+            await logActivity({
+                name: `${user.firstName} ${user.lastName}`,
+                action: "login",
+                staffId: user.staffId,
+                role: user.role,
+            });
+            io.emit("activeStateChange");
+            io.emit("logUpdate");
             return res.status(200).json({
                 message: `log in successful`,
                 result: {

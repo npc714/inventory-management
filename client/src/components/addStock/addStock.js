@@ -1,5 +1,6 @@
 import { ref, computed, watch } from "vue";
 import { useStockStore } from "../stores/stock";
+import { useAuthStore } from "../stores/auth";
 
 export function useAddStock(){
 
@@ -11,6 +12,7 @@ export function useAddStock(){
     const quantity=ref("");
     const costPrice=ref("");
     const sellingPrice=ref("");
+    const auth=useAuthStore();
     
     const sellingPricePercent = computed({
         get() {
@@ -91,7 +93,16 @@ export function useAddStock(){
             costPrice: costPrice.value,
             sellingPrice: sellingPrice.value,
         };
-        stock.addStock(item);
+
+        const log={
+            action: "addStock",
+            name: auth.getStaffName,
+            staffId: auth.getStaffId,
+            added: item,
+            role: auth.getUserRole,
+        }
+
+        stock.addStock({item, log});
         console.log(item);
     }
 

@@ -3,6 +3,7 @@
 const express=require("express");
 const bcrypt=require("bcrypt")
 const {addRecord, findRecord, deleteRecord, listRecords}=require("../../modules/database");
+const {logActivity}=require("../../modules/fileStorage");
 
 const router=express.Router();
 
@@ -10,17 +11,18 @@ router.post('/add-user', async(req, res)=>{
 
     try{
 
-        const existingUser=await findRecord("users", {staffId: req.body.staffId});
+        const existingUser=await findRecord("users", {staffId: req.body.staff.staffId});
         if(existingUser) return res.status(200).json({message: `User already exists`});
 
-        const hashedPassword=await bcrypt.hash(req.body.password, 10);
-        req.body.password=hashedPassword;
-        req.body.online=false;
-        req.body.lastSeen="";
+        const hashedPassword=await bcrypt.hash(req.body.staff.password, 10);
+        req.body.staff.password=hashedPassword;
+        req.body.staff.online=false;
+        req.body.staff.lastSeen="";
 
-        await addRecord("users", req.body);
-        console.log(`user "${req.body.firstName}" added to users`);
-        return res.status(200).json({message: `Successfully added ${req.body.firstName} as ${req.body.role} staff`});
+        await addRecord("users", req.body.staff);
+        await logActivity(req.body.log);
+        console.log(`user "${req.body.staff.firstName}" added to users`);
+        return res.status(200).json({message: `Successfully added ${req.body.staff.firstName} as ${req.body.staff.role} staff`});
 
     }catch(err){
         console.log(err);

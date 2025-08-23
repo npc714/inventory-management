@@ -37,7 +37,7 @@
                 <button class="role-button">
 
                     <div class="account-initial">
-                        G
+                        {{auth.getStaffName[0].toUpperCase()}}
                     </div>
 
                     Sales
@@ -70,7 +70,7 @@
 
                     <div class="total-sales-stats stats">
                         <p class="stat-title">Sales Today</p>
-                        <p class="stat-data">53</p>
+                        <p class="stat-data">{{recentSales.length}}</p>
                     </div>
 
                     <div class="stat-icon">
@@ -89,7 +89,7 @@
 
                     <div class="total-revenue-stats stats">
                         <p class="stat-title">Revenue Today</p>
-                        <p class="stat-data">₦ 45,000</p>
+                        <p class="stat-data">₦ {{revenueToday.toLocaleString()}}</p>
                     </div>
 
                     <div class="stat-icon">
@@ -107,7 +107,7 @@
 
                     <div class="items-sold-stats stats">
                         <p class="stat-title">Items Sold</p>
-                        <p class="stat-data">15</p>
+                        <p class="stat-data">{{itemsSold}}</p>
                     </div>
 
                     <div class="stat-icon">
@@ -125,7 +125,7 @@
 
                     <div class="average-sale-stats stats">
                         <p class="stat-title">Average Sale</p>
-                        <p class="stat-data">₦ 3,000</p>
+                        <p class="stat-data">₦ {{recentSales.length>0?Math.round(revenueToday/recentSales.length).toLocaleString():0}}</p>
                     </div>
 
                     <div class="stat-icon">
@@ -188,10 +188,11 @@
                             </p>
 
                             <p class="product-id">SKU: {{ x.sku.toLowerCase() }}</p>
-                            <p class="product-quantity">{{ x.totalQuantity }} left</p>
+                            <p class="product-quantity" v-if="x.totalQuantity>1">{{ x.totalQuantity }} left</p>
+                            <p class="product-quantity" v-else style="color: red;">Out Of Stock</p>
                         </div>
 
-                        <div class="button-wrapper">
+                        <div class="button-wrapper" v-if="x.totalQuantity>1">
                             <p class="product-price">₦{{ x.sellingPrice.toLocaleString() }}</p>
 
                             <form @submit.prevent="addSaleItem(x, itemQuantity)">
@@ -279,169 +280,15 @@
 
                     <div class="recent-sale-list">
 
-                        <div class="recent-sale-item">
+                        <div class="recent-sale-item" v-for="x in recentSales">
                             <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
+                                <p class="recent-sale-description">{{x.itemNames}}</p>
                                 <p class="time">
-                                    12:45 PM
+                                    {{x.time}}
                                 </p>
                             </div>
                             <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
-                            </div>
-                        </div>
-                        <div class="recent-sale-item">
-                            <div class="recent-sale-info">
-                                <p class="recent-sale-description">MacBook Pro + AirPods</p>
-                                <p class="time">
-                                    12:45 PM
-                                </p>
-                            </div>
-                            <div class="recent-sale-price">
-                                ₦ 8,000,000
+                                ₦ {{x.saleTotal.toLocaleString()}}
                             </div>
                         </div>
 
@@ -473,6 +320,9 @@ const {
     itemQuantity,
     saleTotal,
     totalSaleItems,
+    recentSales,
+    revenueToday,
+    itemsSold,
     addSaleItem,
     removeSaleItem,
     processPayment,
