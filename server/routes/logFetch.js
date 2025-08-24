@@ -12,7 +12,7 @@ router.get("/sales/:id", async(req, res)=>{
         
     } catch (err) {
         console.log(err);
-        res.status(500).json({message: "failed to fetch logs"});
+        res.status(500).json({message: "Failed to fetch logs"});
     }
 
 });
@@ -25,7 +25,7 @@ router.get("/activity", async(req, res)=>{
         res.status(200).json({message: "success", result: log});
     } catch (err) {
         console.log(err);
-        res.status(500).json({message: "failed to fetch logs"});
+        res.status(500).json({message: "Failed to fetch logs"});
     }
 
 });

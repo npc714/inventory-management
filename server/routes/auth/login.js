@@ -15,10 +15,10 @@ module.exports=function (io){
         try{
 
             const user=await findRecord("users", {staffId: req.body.staffId});
-            if(!user||(user&&req.body.role!==user.role)) return res.status(404).json({message: `user not found`});
-            if(user.online) return res.status(403).json({message: `user active on another device / browser`});
+            if(!user||(user&&req.body.role!==user.role)) return res.status(404).json({message: `User not found`});
+            if(user.online) return res.status(403).json({message: `User active on another device / browser`});
             const match=await bcrypt.compare(req.body.password, user.password);
-            if(!match) return res.status(403).json({message: `incorrect password`});
+            if(!match) return res.status(403).json({message: `Incorrect password`});
 
             const payload={
                 firstName: user.firstName,
@@ -52,14 +52,14 @@ module.exports=function (io){
             io.emit("activeStateChange");
             io.emit("logUpdate");
             return res.status(200).json({
-                message: `log in successful`,
+                message: `Log in successful`,
                 result: {
                     staffId: user.staffId
                 }
             });
 
         }catch(err){
-            return res.status(500).json({message: `server error`});
+            return res.status(500).json({message: `Server error`});
         }
 
     });

@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import api from "../api";
 import router from "../../router";
 import { useStaffStore } from "./staff";
+import { useFeedbackStore } from "./feedback";
+import Feedback from "../feedBack/feedback.vue";
 
 export const useAuthStore = defineStore("auth", {
     state: () => ({
@@ -38,20 +40,24 @@ export const useAuthStore = defineStore("auth", {
 
         async login(credentials) {
             const staff = useStaffStore();
+            const feedback=useFeedbackStore();
             try {
                 const response = await api.post("/auth/login", credentials);
                 this.isAuthenticated = response.status === 200;
+                feedback.addNotification("success", response.data.message)
                 this.startHeartbeat();
                 console.log(response.data);
 
                 return;
             } catch (err) {
                 console.log(err);
+                feedback.addNotification("error", err.response.data.message)
             }
         },
 
         async logOut() {
             const staff = useStaffStore();
+            const feedback=useFeedbackStore();
             try {
                 const response = await api.get(
                     `/auth/logout/${this.getStaffId}`
@@ -59,8 +65,10 @@ export const useAuthStore = defineStore("auth", {
                 this.stopHeartbeat();
                 router.push("/login");
                 console.log(response.data);
+                feedback.addNotification("success", response.data.message)
             } catch (err) {
                 console.log(err);
+                feedback.addNotification("error", err.response.data.message)
             }
         },
     },

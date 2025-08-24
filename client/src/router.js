@@ -5,6 +5,7 @@ import Dashboard from  "./components/dashboard/dashboard.vue";
 import AddStock from "./components/addStock/addStock.vue";
 
 import { useAuthStore } from "./components/stores/auth";
+import { useFeedbackStore } from "./components/stores/feedback";
 import api from "./components/api";
 
 const routes=[
@@ -45,6 +46,7 @@ const router=createRouter({
 
 router.beforeEach(async (to, from, next) => {
     const auth = useAuthStore();
+    const feedBack=useFeedbackStore();
 
     try {
         const response = await api.get(`auth/logged-in`);
@@ -74,6 +76,7 @@ router.beforeEach(async (to, from, next) => {
         auth.user = null;
 
         const status = err.response?.status;
+        feedBack.addNotification("error", err.response.data.message);
 
         if (to.meta.requiresAuth) {
             return next('/login');

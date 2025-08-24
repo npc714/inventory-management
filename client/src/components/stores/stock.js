@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useFeedbackStore } from "./feedback";
 import api from "../api";
 
 export const useStockStore = defineStore("stock", {
@@ -16,12 +17,15 @@ export const useStockStore = defineStore("stock", {
     actions: {
 
         async addStock(stock){
+            const feedback=useFeedbackStore()
 
             try {
                 const response = await api.post("/inventory/add-item", stock);
                 console.log(response.data);
+                feedback.addNotification("success", response.data.message);
             } catch (err) {
                 console.log(err);
+                feedback.addNotification("error", err.response.data.message);
             }
 
         },

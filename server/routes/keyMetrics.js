@@ -38,7 +38,7 @@ module.exports=function (io){
             return res.status(200).json({ message: "success" });
         } catch (err) {
             console.log(err);
-            return res.status(500).json({ message: "failed to post metric" });
+            return res.status(500).json({ message: "Server error" });
         }
     });
 
@@ -85,7 +85,7 @@ module.exports=function (io){
 
         } catch (err) {
             console.log(err);
-            return res.status(500).json({ message: "failed to fetch metric" });
+            return res.status(500).json({ message: "Failed to fetch metrics" });
         }
 
     });
@@ -137,7 +137,7 @@ module.exports=function (io){
 
         }catch(err){
             console.log(err);
-            return res.status(500).json({ message: "failed to fetch metric" });
+            return res.status(500).json({ message: "Failed to fetch metric" });
         }
     });
 

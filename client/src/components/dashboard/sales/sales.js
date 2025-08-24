@@ -1,12 +1,14 @@
 import { onBeforeUnmount, onMounted, ref, computed } from "vue";
 import { useStockStore } from "../../stores/stock";
 import { useAuthStore } from "../../stores/auth";
+import { useFeedbackStore } from "../../stores/feedback";
 import socket from "../../../socket";
 import api from "../../api";
 
 export function useSales() {
     const stock = useStockStore();
     const auth = useAuthStore();
+    const feedback=useFeedbackStore();
     const saleItems = ref([]);
     const itemQuantity = ref(1);
     const saleTotal = computed(() => {
@@ -113,6 +115,7 @@ export function useSales() {
             itemQuantity.value = 1;
         } catch (err) {
             console.log(err);
+            feedback.addNotification("error", err.message);
         }
     }
 
@@ -155,8 +158,10 @@ export function useSales() {
             });
             saleItems.value = [];
             console.log(res);
+            feedback.addNotification("success", response.data.message);
         } catch (err) {
             console.log(err);
+            feedback.addNotification("error", err.message);
         }
     }
 

@@ -1,0 +1,102 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 500px;
+    height: fit-content;
+    z-index: 20;
+    top: 20px;
+}
+
+.container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 65px;
+    border-left: 4px solid;
+    border-radius: 10px;
+    margin: 3px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.feedback-text{
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.close-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    height: 100%;
+    float: right;
+    border: none;
+    background: none;
+}
+
+svg{
+    width: 16px;
+    stroke-width: 3;
+    color: rgb(100,100,100);
+}
+
+.loading-bar{
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    bottom: 0;
+    animation: shrink 5s linear forwards;
+}
+
+.success{
+    border-color: green;
+}
+
+.successLoading{
+    background-color: green;
+}
+
+.error{
+    border-color: red;
+}
+
+.errorLoading{
+    background-color: red;
+}
+
+@keyframes shrink {
+    from { width: 100%; }
+    to   { width: 0%; }
+}
+
+.slide-in-left-enter-active, .slide-in-left-leave-active{
+    position: absolute;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.slide-in-left-leave-active{
+    position: absolute;
+}
+
+.slide-in-left-enter-from, .slide-in-left-leave-to{
+    opacity: 0;
+    transform: translateX(100vw);
+}
+
+.slide-in-left-enter-to, .slide-in-left-leave-from{
+    opacity: 1;
+}
+
+.slide-in-left-move {
+  transition: transform 0.3s;
+}
+
+
+
+

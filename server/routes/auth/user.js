@@ -54,7 +54,7 @@ router.get('/list-users', async(req, res)=>{
 });
 
 
-router.delete('/remove-user', async(req, res)=>{
+/*router.delete('/remove-user', async(req, res)=>{
 
     try{
 
@@ -66,7 +66,7 @@ router.delete('/remove-user', async(req, res)=>{
         console.log(err);
     }
 
-});
+});*/
 
 
 module.exports=router;

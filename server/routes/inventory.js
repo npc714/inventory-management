@@ -77,10 +77,10 @@ module.exports=function(io){
             await logActivity(req.body.log);//continue here
             io.emit("itemAdded");
             io.emit("logUpdate");
-            return res.status(200).json({message: `successfully added ${req.body.item.name} to items`});
+            return res.status(200).json({message: `Successfully added ${req.body.item.name} to items`});
         }catch(err){
             console.log(err);
-            return res.status(500).json({message: `server error`});
+            return res.status(500).json({message: `Server error`});
         }
 
     });
@@ -95,7 +95,7 @@ module.exports=function(io){
 
         } catch(err){
             console.log(err);
-            return res.status(500).json({message: `server error`});
+            return res.status(500).json({message: `Server error`});
         }
 
     });
@@ -106,11 +106,11 @@ module.exports=function(io){
         try{
 
             await updateRecord("items", req.body.filter, req.body.update);
-            return res.status(200).json({message: `Successfully updated items`});
+            return res.status(200).json({message: `Successfully Updated item`});
 
         } catch(err){
             console.log(err);
-            return res.status(500).json({message: `server error`});
+            return res.status(500).json({message: `Server error`});
         }
 
     });
@@ -162,7 +162,7 @@ module.exports=function(io){
             
             await logSale(req.body.saleLog);
             await logActivity(req.body.activityLog)
-            res.status(200).json({message: `success`});
+            res.status(200).json({message: `Payment successful`});
 
         } catch (err) {
             console.log(err);

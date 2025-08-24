@@ -27,10 +27,10 @@ module.exports= function(io){
             });
             io.emit("activeStateChange");
             io.emit("logUpdate");
-            return res.status(200).json({message: `logout successful`});
+            return res.status(200).json({message: `Logout successful`});
         }catch(err){
             console.log(err);
-            return res.status(500).json({message: `logout failed`});
+            return res.status(500).json({message: `Server error`});
         }
 
     });

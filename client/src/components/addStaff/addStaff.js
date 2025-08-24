@@ -1,6 +1,7 @@
 import {ref} from 'vue';
 import api from "../../components/api";
 import { useAuthStore } from '../stores/auth';
+import { useFeedbackStore } from '../stores/feedback';
 
 export function useAddStaff(){
 
@@ -11,6 +12,7 @@ export function useAddStaff(){
     const role=ref('');
     const passwordVisible=ref(false);
     const auth=useAuthStore();
+    const feedback=useFeedbackStore();
 
     function togglePasswordVisibility(){
         passwordVisible.value=!passwordVisible.value
@@ -39,9 +41,11 @@ export function useAddStaff(){
             const response=await api.post('auth/admin/add-user', {staff, log});
             firstName.value=lastName.value=staffId.value=password.value=role.value="";
             console.log(response);
+            feedback.addNotification("success", response.data.message)
 
         }catch(err){
             console.log(err);
+            feedback.addNotification("error", err.response.data.message)
         }
 
     }

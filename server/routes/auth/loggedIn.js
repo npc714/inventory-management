@@ -11,7 +11,7 @@ module.exports=function(io){
 
         try {
 
-            if (!loggedIn) return res.status(403).json({ message: `not logged in` });
+            if (!loggedIn) return res.status(403).json({ message: `Invalid session` });
             const decoded = jwt.verify(loggedIn, process.env.JWT_SECRET);
             
             await updateRecord("users", {staffId: decoded.staffId}, {
@@ -22,7 +22,7 @@ module.exports=function(io){
             io.emit("activeStateChange");
             
             return res.status(200).json({
-                message: `success`,
+                message: `Login successful`,
                 authenticated: true,
                 result: decoded,
             });
@@ -51,7 +51,7 @@ module.exports=function(io){
                 path: "/",
             });
 
-            return res.status(401).json({ message: "unauthorized" });
+            return res.status(401).json({ message: "Session expired login to continue" });
         }
     });
 
