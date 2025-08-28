@@ -20,4 +20,5 @@ dist/
 build/
 
 # local database files (if they're generated data)
-files/database*
+files/activity logs*
+files/staff logs*
